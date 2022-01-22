@@ -27,6 +27,7 @@ function Cast() {
   return (
     <>
       <h1>{error?.message}</h1>
+      <p>{cast?.length === 0 && "We don't have any casts for this movie."}</p>
       <ul>
         {cast?.map((actor) => {
           return (

@@ -53,7 +53,9 @@ function MovieDetailsPage() {
           <MovieContainer>
             <MoviImg
               src={
-                movie && `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                movie?.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                  : "https://via.placeholder.com/294x441/808080/545454&text=NO POSTER :("
               }
               alt={movie?.tagline}
             />
