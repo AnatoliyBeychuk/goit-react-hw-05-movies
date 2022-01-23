@@ -1,6 +1,7 @@
-import { NavLink, Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MoviesAPI from "../../MoviesAPI/MoviesAPI";
+import MovieList from "../../components/MovieList/MovieList";
 
 function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -54,15 +55,7 @@ function MoviesPage() {
         </button>
       </form>
       {<h1>{error?.message}</h1>}
-      <ul>
-        {movies.map((movie) => {
-          return (
-            <li key={movie.id}>
-              <NavLink to={`${movie.id}`}>{movie.title}</NavLink>
-            </li>
-          );
-        })}
-      </ul>
+      <MovieList array={movies} />
       <Outlet />
     </>
   );

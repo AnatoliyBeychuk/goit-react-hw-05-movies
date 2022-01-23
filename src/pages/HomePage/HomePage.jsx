@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MoviesAPI from "../../MoviesAPI/MoviesAPI";
+import MovieList from "../../components/MovieList/MovieList";
+
 function HomePage() {
   const [trending, setTrending] = useState([]);
   const [error, setError] = useState(null);
@@ -22,13 +24,7 @@ function HomePage() {
   return (
     <>
       <h1>{error?.message ?? "Trending today"}</h1>
-      <ul>
-        {trending.map((movie) => (
-          <li key={movie.id}>
-            <NavLink to={`movies/${movie.id}`}>{movie.title}</NavLink>
-          </li>
-        ))}
-      </ul>
+      <MovieList path="movies/" array={trending} />
     </>
   );
 }

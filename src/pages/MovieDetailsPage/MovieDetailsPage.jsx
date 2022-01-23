@@ -47,7 +47,7 @@ function MovieDetailsPage() {
         <h1>{error.message}</h1>
       ) : (
         <>
-          <button type="button" name="goBack" onClick={() => navigate("/")}>
+          <button type="button" name="goBack" onClick={() => navigate(-1)}>
             Go Back
           </button>
           <MovieContainer>
