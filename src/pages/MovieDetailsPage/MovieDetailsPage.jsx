@@ -29,6 +29,8 @@ function MovieDetailsPage() {
   const { pathname, search } = locationRef.current.state.from;
   const path = pathname + search;
 
+  console.log("locationRef: ", locationRef);
+
   useEffect(() => {
     const { movieId } = params;
     loadMoviemDetail(movieId);
@@ -90,10 +92,10 @@ function MovieDetailsPage() {
 
           <h3>Additional Information</h3>
           <AdditionalContainer>
-            <NavLink to="cast" state={{ from: locationRef }}>
+            <NavLink to="cast" state={{ from: locationRef.current }}>
               Cast
             </NavLink>
-            <NavLink to="reviews" state={{ from: locationRef }}>
+            <NavLink to="reviews" state={{ from: locationRef.current }}>
               Reviews
             </NavLink>
           </AdditionalContainer>

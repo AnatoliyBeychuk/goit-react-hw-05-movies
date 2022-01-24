@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 function MovieList({ array, path }) {
   const location = useLocation();
-
   return (
     <ul>
       {array.map((movie) => (
