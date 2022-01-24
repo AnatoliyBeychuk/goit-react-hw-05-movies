@@ -5,7 +5,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import MoviesAPI from "../../MoviesAPI/MoviesAPI";
 import {
   Container,
@@ -25,11 +25,8 @@ function MovieDetailsPage() {
   let navigate = useNavigate();
 
   const location = useLocation();
-  const locationRef = useRef(location);
-  const { pathname, search } = locationRef.current.state.from;
+  const { pathname, search } = location.state.from;
   const path = pathname + search;
-
-  console.log("locationRef: ", locationRef);
 
   useEffect(() => {
     const { movieId } = params;
@@ -94,10 +91,10 @@ function MovieDetailsPage() {
 
           <h3>Additional Information</h3>
           <AdditionalContainer>
-            <NavLink to="cast" state={{ ...locationRef.current.state }}>
+            <NavLink to="cast" state={{ ...location.state }}>
               Cast
             </NavLink>
-            <NavLink to="reviews" state={{ ...locationRef.current.state }}>
+            <NavLink to="reviews" state={{ ...location.state }}>
               Reviews
             </NavLink>
           </AdditionalContainer>
