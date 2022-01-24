@@ -1,6 +1,7 @@
 import { Outlet, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MoviesAPI from "../../MoviesAPI/MoviesAPI";
+import SearchForm from "../../components/SearchForm/SearchForm";
 import MovieList from "../../components/MovieList/MovieList";
 
 function MoviesPage() {
@@ -25,35 +26,27 @@ function MoviesPage() {
       .catch((error) => setError(error));
   }
 
+  const handleChangeQuery = (query) => {
+    setQuery(query);
+  };
+
+  const handleChangeSearchParams = (query) => {
+    if (query) {
+      setSearchParams({ query });
+    } else {
+      setSearchParams({});
+    }
+    setMovies([]);
+    setError(null);
+  };
+
   return (
     <>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (query) {
-            setSearchParams({ query });
-          } else {
-            setSearchParams({});
-          }
-          setMovies([]);
-          setError(null);
-        }}
-      >
-        <input
-          value={query}
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Enter movie title..."
-          onChange={(event) => {
-            setQuery(event.currentTarget.value);
-          }}
-        />
-
-        <button type="submit" aria-label="Search" disabled={query === ""}>
-          Search
-        </button>
-      </form>
+      <SearchForm
+        query={query}
+        onQueryChange={handleChangeQuery}
+        onSearchParamsChange={handleChangeSearchParams}
+      />
       {<h1>{error?.message}</h1>}
       <MovieList array={movies} />
       <Outlet />

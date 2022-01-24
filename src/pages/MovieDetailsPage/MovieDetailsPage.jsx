@@ -1,5 +1,11 @@
-import { NavLink, Outlet, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import MoviesAPI from "../../MoviesAPI/MoviesAPI";
 import {
   Container,
@@ -17,6 +23,11 @@ function MovieDetailsPage() {
   const [score, setScore] = useState(0);
   const params = useParams();
   let navigate = useNavigate();
+
+  const location = useLocation();
+  const locationRef = useRef(location);
+  const { pathname, search } = locationRef.current.state.from;
+  const path = pathname + search;
 
   useEffect(() => {
     const { movieId } = params;
@@ -47,7 +58,11 @@ function MovieDetailsPage() {
         <h1>{error.message}</h1>
       ) : (
         <>
-          <button type="button" name="goBack" onClick={() => navigate(-1)}>
+          <button
+            type="button"
+            name="goBack"
+            onClick={() => navigate(path)} //вернуться к списку, при этом сохранить "состояние"
+          >
             Go Back
           </button>
           <MovieContainer>
@@ -75,8 +90,12 @@ function MovieDetailsPage() {
 
           <h3>Additional Information</h3>
           <AdditionalContainer>
-            <NavLink to="cast">Cast</NavLink>
-            <NavLink to="reviews">Reviews</NavLink>
+            <NavLink to="cast" state={{ from: locationRef }}>
+              Cast
+            </NavLink>
+            <NavLink to="reviews" state={{ from: locationRef }}>
+              Reviews
+            </NavLink>
           </AdditionalContainer>
           <Outlet />
         </>

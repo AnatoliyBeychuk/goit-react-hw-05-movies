@@ -9,7 +9,7 @@ function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/");
+    navigate("/"); //исправить тут!!!
     loadTrendingMovies();
   }, [navigate]);
 

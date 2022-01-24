@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AppBar from "./components/AppBar/AppBar";
 import Loader from "./components/Loader/Loader";
 
@@ -39,8 +39,9 @@ function App() {
                 <Route path="cast" element={<Cast />} />
                 <Route path="reviews" element={<Reviews />} />
               </Route>
+              <Route path="*" element={<Navigate to="/" />} />
             </Route>
-            <Route path="*" element={<HomePage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </Suspense>
