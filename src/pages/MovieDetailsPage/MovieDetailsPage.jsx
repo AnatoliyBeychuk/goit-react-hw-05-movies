@@ -63,7 +63,9 @@ function MovieDetailsPage() {
           <button
             type="button"
             name="goBack"
-            onClick={() => navigate(path)} //вернуться к списку, при этом сохранить "состояние"
+            onClick={() => {
+              navigate(path);
+            }} //вернуться к списку, при этом сохранить "состояние"
           >
             Go Back
           </button>
@@ -92,10 +94,10 @@ function MovieDetailsPage() {
 
           <h3>Additional Information</h3>
           <AdditionalContainer>
-            <NavLink to="cast" state={{ from: locationRef.current }}>
+            <NavLink to="cast" state={{ ...locationRef.current.state }}>
               Cast
             </NavLink>
-            <NavLink to="reviews" state={{ from: locationRef.current }}>
+            <NavLink to="reviews" state={{ ...locationRef.current.state }}>
               Reviews
             </NavLink>
           </AdditionalContainer>
