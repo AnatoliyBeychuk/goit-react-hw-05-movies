@@ -27,8 +27,10 @@ function MovieDetailsPage() {
   let location = useLocation();
   let path = "/";
   if (location.state) {
-    const { pathname, search } = location.state.from;
-    path = pathname + search;
+    if (location.state.from) {
+      const { pathname, search } = location.state.from;
+      path = pathname + search;
+    }
   }
 
   useEffect(() => {
