@@ -21,12 +21,18 @@ function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [score, setScore] = useState(0);
+  const [path, setPath] = useState({ pathname: "/", search: "" });
   const params = useParams();
   let navigate = useNavigate();
 
   const location = useLocation();
-  const { pathname, search } = location.state.from;
-  const path = pathname + search;
+
+  useEffect(() => {
+    if (location.state) {
+      const { pathname, search } = location.state.from;
+      setPath({ pathname, search });
+    }
+  }, [location]);
 
   useEffect(() => {
     const { movieId } = params;
@@ -61,7 +67,7 @@ function MovieDetailsPage() {
             type="button"
             name="goBack"
             onClick={() => {
-              navigate(path);
+              navigate(path.pathname + path.search);
             }} //вернуться к списку, при этом сохранить "состояние"
           >
             Go Back
